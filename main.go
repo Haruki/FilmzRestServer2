@@ -25,6 +25,17 @@ func main() {
 				apis.ActivityLogger(app),
 			},
 		})
+		// add new "PUT /seen" route to the app router (echo)
+		e.Router.AddRoute(echo.Route{
+			Method: http.MethodPut,
+			Path:   "/seen",
+			Handler: func(c echo.Context) error {
+				return c.String(200, "Seen!")
+			},
+			Middlewares: []echo.MiddlewareFunc{
+				apis.ActivityLogger(app),
+			},
+		})
 
 		return nil
 	})
